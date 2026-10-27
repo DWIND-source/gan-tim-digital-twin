@@ -16,4 +16,4 @@ Choose a commercial thermal pad, its stock thickness and the assembly pressure, 
 
 Team **WINDWIN** · Dinh Phong Nguyen, Khanh Linh Truong · VinUniversity, Vietnam
 
-© 2026 Dinh Phong Nguyen. All rights reserved. No licence is granted to copy, modify or redistribute this page or its content.
+© 2026 Team WINDWIN (Dinh Phong Nguyen, Khanh Linh Truong). All rights reserved. No licence is granted to copy, modify or redistribute this page or its content.
