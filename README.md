@@ -14,6 +14,6 @@ Choose a commercial thermal pad, its stock thickness and the assembly pressure, 
 - Simulation-based demo; values are indicative and are not experimental measurements.
 - This repository contains only the two compiled demo pages and the open-source plotly.js library (MIT licence) they use. The simulation models, data and methods are not included.
 
-Author: **Dinh Phong Nguyen** · VinUniversity, Vietnam
+Team **WINDWIN** · Dinh Phong Nguyen, Khanh Linh Truong · VinUniversity, Vietnam
 
 © 2026 Dinh Phong Nguyen. All rights reserved. No licence is granted to copy, modify or redistribute this page or its content.

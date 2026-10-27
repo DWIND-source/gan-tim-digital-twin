@@ -119,7 +119,7 @@ input[type=range] { width: 100%; accent-color: var(--accent) }
     </div>
     <div class="byline">
       <span class="tag">EPTC 2026 Student Innovation Challenge</span>
-      <span class="author">Author: <b>Dinh Phong Nguyen</b> · Vietnam</span>
+      <span class="author">Team <b>WINDWIN</b> · Dinh Phong Nguyen, Khanh Linh Truong · VinUniversity</span>
     </div>
   </header>
 
@@ -284,7 +284,7 @@ function renderControls() {
   document.getElementById("pwlab").textContent = `${S.P} W`;
   document.getElementById("cov").value = S.cov;
   document.getElementById("covlab").textContent = `${S.cov} %`;
-  const hl = { 100: "natural", 200: "baseline", 500: "fan", 1000: "strong fan", 3000: "cold-plate-like" };
+  const hl = { 100: "low airflow", 200: "baseline", 500: "fan", 1000: "strong fan", 3000: "cold-plate-like" };
   document.getElementById("hlab").textContent = `${S.h} W/m²K`;
   const cool = document.getElementById("cool"); cool.replaceChildren();
   D.cool.forEach(q => cool.append(btn(String(q.h), hl[q.h] || "", S.h === q.h, () => { S.h = q.h; update(); })));

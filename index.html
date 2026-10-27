@@ -145,7 +145,7 @@ svg text { font-family: var(--font) }
 <body>
 <div id="viewport"><div id="stage">
 
-  <div class="brand"><div class="dot"></div><b>CONTACT MATTERS</b><span>choosing chip-cooling pads that really work</span></div>
+  <div class="brand"><div class="dot"></div><b>CONTACT MATTERS</b><span>Team WINDWIN · EPTC 2026 Student Innovation Challenge</span></div>
   <nav id="tabs" aria-label="Site"><a class="tab on" href="index.html" aria-current="page">The story</a><button class="cm-theme" type="button" onclick="cmToggleTheme()">☀ Light</button><a class="tab cta" href="twin.html">Try the digital twin →</a></nav>
 
   <!-- 1. the world before -->
@@ -271,7 +271,7 @@ svg text { font-family: var(--font) }
     </div>
     <div class="limits rise d5">
       <span class="tag"><i style="background:var(--ink3)"></i>Simulation study, own lab test not yet done</span>
-      <span class="tag"><i style="background:var(--ink3)"></i>Checked against one published experiment</span>
+      <span class="tag"><i style="background:var(--ink3)"></i>Checked against a published experiment and 30 vendor test points</span>
       <span class="tag"><i style="background:var(--ink3)"></i>Risk scores rank designs; they are not lifetimes</span>
       <span class="tag"><i style="background:var(--ink3)"></i>AI agrees with full simulation within 0.02 °C on 5 re-checked designs</span>
     </div>
@@ -298,6 +298,7 @@ svg text { font-family: var(--font) }
       <div class="big rise d1">Choose the pad by how it <em>works in the package</em>,<br>not by its headline number.</div>
       <p class="lead rise d2" style="text-align:center;max-width:1100px">Published datasheets in, a cooler and safer chip out, with the trade-offs on the table.</p>
       <a class="endcta rise d3" href="twin.html">Try the digital twin yourself →</a>
+      <p class="rise d4" style="margin-top:36px;font-size:20px;letter-spacing:.12em;color:var(--ink3)">TEAM WINDWIN · DINH PHONG NGUYEN · KHANH LINH TRUONG · VINUNIVERSITY</p>
     </div>
   </section>
 
@@ -430,8 +431,10 @@ function setHero(i) {
   const tl = document.getElementById("tL"); tl.textContent = `${HERO_T[i].toFixed(1)} °C`; tl.style.color = tColor(HERO_T[i]);
   document.getElementById("tR").style.color = tColor(77.1);
   document.getElementById("cqLbl").textContent = HERO_LBL[i];
-  document.getElementById("heroMsg").innerHTML = HERO_T[i] < 77.1 ? "With good contact, the high-number pad wins." :
-    `With ${HERO_LBL[i]} contact, the <b style="color:var(--bad)">"best" pad runs ${(HERO_T[i] - 77.1).toFixed(0)} °C hotter</b> than an ordinary pad that touches well.`;
+  const dT = HERO_T[i] - 77.1;
+  document.getElementById("heroMsg").innerHTML = dT < 0 ? "With good contact, the high-number pad wins." :
+    dT < 1 ? `With ${HERO_LBL[i]} contact, the "best" pad <b style="color:var(--warm)">only ties</b> an ordinary pad that touches well. Its 10× higher number is gone.` :
+    `With ${HERO_LBL[i]} contact, the <b style="color:var(--bad)">"best" pad runs ${dT.toFixed(0)} °C hotter</b> than an ordinary pad that touches well.`;
 }
 cq.addEventListener("input", () => { userTouched(); setHero(+cq.value); });
 setHero(4);
@@ -478,7 +481,8 @@ new MutationObserver(() => draw3d(baMode)).observe(document.documentElement, { a
 setBA("before");
 
 // scene 6: power headroom vs cooling (simulated allowable power at Tj = 150 °C)
-const POW = [["Natural air", 134, 159], ["Standard heat sink", 198, 256], ["With a fan", 279, 409], ["Strong fan", 325, 517], ["Liquid-like cooling", 372, 650]];
+// heat-sink convection h = 100 / 200 / 500 / 1000 / 3000 W/m²K; allowable power rounded down
+const POW = [["Low airflow", 134, 158], ["Standard heat sink", 198, 256], ["With a fan", 279, 409], ["Strong fan", 325, 517], ["Cold-plate-like", 372, 649]];
 let powSel = 1;
 function drawPow() {
   const max = 650;
@@ -558,7 +562,7 @@ function loop(t) {
     if (cur === 4 && elapsed > dur * .5 && baMode === "before") setBA("with");
     if (cur === 5) { const k = Math.min(4, Math.floor(elapsed / dur * 5)); if (k !== powSel) { powSel = k; drawPow(); } }
     if (elapsed >= dur) go(cur + 1);
-  } else if (t - lastTouch > 10000) { setPlaying(true); go(0); }   // idle 10 s -> restart the cinematic loop
+  } else if (t - lastTouch > 120000) { setPlaying(true); go(0); }   // idle 2 min -> restart the cinematic loop (kiosk use; long enough for a live talk)
   requestAnimationFrame(loop);
 }
 if (location.search.includes("static")) { const st = document.createElement("style"); st.textContent = "*{transition:none!important}"; document.head.appendChild(st); }  // QA screenshots
